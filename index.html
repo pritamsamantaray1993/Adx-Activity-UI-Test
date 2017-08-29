@@ -1,9 +1,10 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>Availability Search</title>
     <meta charset="utf-8" />
     <meta charset="utf-8" />
+    <link rel="shortcut icon" type="image/png" href="Content/images/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="" />
     <meta name="author" content="BrandSystems" />
@@ -40,7 +41,7 @@
                                         <label class="control-label" for="destination">Destination</label>
                                         <div class="controls">
                                             <input type="text" name="destination" id="destination" placeholder="Search for airport" class="form-control" required="required" />
-                                            <input type="hidden" name="Latitude" id="Latitude" class="form-control" required="required"/>
+                                            <input type="hidden" name="Latitude" id="Latitude" class="form-control" required="required" />
                                             <input type="hidden" name="IATACode" id="IATACode" class="form-control" required="required" />
                                             <input type="hidden" name="Longitude" id="Longitude" class="form-control" required="required" />
                                         </div>
@@ -62,7 +63,7 @@
                                         <div class="controls">
                                             <select class="longbox" name="MinRating" ui-select2 id="MinRating">
                                                 <option value="0">0</option>
-                                                <option value="1">1</option>
+                                                <option value="1" selected>1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
                                                 <option value="4">4</option>
@@ -77,24 +78,51 @@
                                                 <option value="0">0</option>
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
-                                                <option value="3">3</option>
+                                                <option value="3" selected>3</option>
                                                 <option value="4">4</option>
                                                 <option value="5">5</option>
                                             </select>
                                         </div>
                                     </div>
-
                                     <div class="control-group">
-                                        <label class="control-label" for="Currency">Curency</label>
+                                        <label class="control-label" for="ActivityType">Activity Type</label>
                                         <div class="controls">
-                                            <select class="longbox" name="Currency" ui-select2 id="Currency">
-                                                <option value="1" selected>USD</option>
+                                            <select class="longbox" name="ActivityType" ui-select2 id="ActivityType">
+                                                <option value="0" selected>All</option>
+                                                <optgroup label="Attraction">
+                                                    <option value="580">Shopping Tours</option>
+                                                    <option value="581">Other</option>
+                                                    <option value="582">Dinner Show</option>
+                                                    <option value="583">Recreational Rentals</option>
+                                                    <option value="584">Boat Tours</option>
+                                                    <option value="585">Sightseeing Tours</option>
+                                                    <option value="586">Theater & Concerts</option>
+                                                    <option value="587">Air Tours</option>
+                                                    <option value="588">Attraction Passes</option>
+                                                    <option value="589">Restaurants</option>
+                                                    <option value="592">Theme Parks</option>
+                                                    <option value="595">Watersports</option>
+                                                    <option value="598">Packages & Combo Tours</option>
+                                                    <option value="604">Other</option>
+                                                    <option value="609">Ski</option>
+                                                    <option value="622">Multiple Day Guided Tours</option>
+                                                    <option value="631">Golf</option>
+                                                    <option value="694">T.H.E. Pass</option>
+                                                    <option value="728">Museum</option>
+                                                    <option value="742">Tours</option>
+                                                    <option value="853">Sporting Events</option>
+                                                </optgroup>
+                                                <optgroup label="Guide">
+                                                    <option value="693">Guide</option>
+                                                </optgroup>
+                                                <optgroup label="Transfer">
+                                                    <option value="601">Shared Transfer</option>
+                                                    <option value="602">Private Transfer</option>
+                                                    <option value="1087">V.I.P. Transfers</option>
+                                                </optgroup>
                                             </select>
                                         </div>
-
                                     </div>
-
-
                                 </div>
                             </div>
                         </form>
@@ -137,6 +165,6 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places&key=AIzaSyDfd-icDuV0rUvLRvAj-v9k7PZ4n7qicog"></script>
     <link href="bower_components/assets/css/typeahead.css" rel="stylesheet" />
     <script src="bower_components/assets/js/libs/bootstrap3-typeahead.min.js"></script>
-    <script src="templates/airports.js"></script>
+    <script src="templates/allairport.js"></script>
 </body>
 </html>
