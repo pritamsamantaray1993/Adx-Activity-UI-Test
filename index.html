@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="BrandSystems" />
+    <link href="bower_components/assets/css/mui.css" rel="stylesheet" />
+    <link href="bower_components/assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="bower_components/assets/css/select2.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="totalstaybooking">
+        <div class="contentBlock">
+            <div title="" class="header bsiLogo">
+                <img id="loginpageTitle" onclick="window.location = 'Search.html'; return false;" src="img/travel-edge-adx.small.png" alt="Logo" />
+            </div>
+            <div id="Reg" class="box box-noborder">
+                <div class="box-header">
+                    <h3>Activity Booking System</h3>
+                    <p>Please fill this form and check for availability.</p>
+                    <div class="information">
+                        <span>
+                            <i class="icon-asterisk"></i>
+                            <span>Mandatory Fields</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="box-content" id="maincontainer">
+                    <div class="box-content-margin">
+                        <form id="RegMetadata" class="form-float">
+                            <div class="span12">
+                                <h4 class="blockTitle">Basic Information</h4>
+                                <div id="staticControls">
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="destination">Destination</label>
+                                        <div class="controls">
+                                            <input type="text" name="destination" id="destination" placeholder="Search for airport" class="form-control" required="required" />
+                                            <input type="hidden" name="Latitude" id="Latitude" class="form-control" required="required"/>
+                                            <input type="hidden" name="IATACode" id="IATACode" class="form-control" required="required" />
+                                            <input type="hidden" name="Longitude" id="Longitude" class="form-control" required="required" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="startdate">Start Date</label>
+                                        <div class="controls">
+                                            <input type="text" name="StartDate" class="activitydate" id="startdate" placeholder="Date" autocomplete="off" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="startdate">End Date</label>
+                                        <div class="controls">
+                                            <input type="text" name="EndDate" class="activitydate" id="enddate" placeholder="Date" autocomplete="off" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="FirstName">Min Rating</label>
+                                        <div class="controls">
+                                            <select class="longbox" name="MinRating" ui-select2 id="MinRating">
+                                                <option value="0">0</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="FirstName">Max Rating</label>
+                                        <div class="controls">
+                                            <select class="longbox" name="MaxRating" ui-select2 id="MaxRating">
+                                                <option value="0">0</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="Currency">Curency</label>
+                                        <div class="controls">
+                                            <select class="longbox" name="Currency" ui-select2 id="Currency">
+                                                <option value="1" selected>USD</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="saving" id="showhideprogress" style="display: none">
+                        <div class="InProgress">
+                            <img src="bower_components/assets/img/loading.gif" />
+                            <span>Saving...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <div class="pull-right buttongroup">
+                        <input id="Back" class="btn btn-small" onclick="window.location = 'Search.html'; return false;" value="Cancel" />
+                        <input id="registerbtn" class="btn btn-medium btn-primary" value="Search" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script id="tmpl-activity" type="text/mustache-template">
+        {{#activities}}
+        <li>
+            <h3><a href="">{{name}}</a></h3>
+            <img src="imgURL" alt="{{name}}" />
+        </li>
+        {{/activities}}
+    </script>
+
+    <script src="bower_components/assets/js/Jquery/jquery-2.0.3.min.js"></script>
+    <script src="bower_components/assets/js/Nod/nod.js"></script>
+    <script src="bower_components/assets/js/Bootstrap/bootstrap-datepicker.js"></script>
+    <script src="bower_components/assets/js/Select2/select2.js"></script>
+    <script src="bower_components/assets/js/libs/underscore.js"></script>
+    <script src="bower_components/assets/js/libs/backbone.js"></script>
+    <script src="bower_components/assets/js/libs/mustache.min.js"></script>
+    <script src="bower_components/assets/js/UtilityFramework/moment.min.js"></script>
+    <script src="bower_components/app/search.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places&key=AIzaSyDfd-icDuV0rUvLRvAj-v9k7PZ4n7qicog"></script>
+    <link href="bower_components/assets/css/typeahead.css" rel="stylesheet" />
+    <script src="bower_components/assets/js/libs/bootstrap3-typeahead.min.js"></script>
+    <script src="templates/airports.js"></script>
+</body>
+</html>
