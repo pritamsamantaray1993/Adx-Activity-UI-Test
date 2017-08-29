@@ -102,7 +102,7 @@ $(document)
                                     item = item.properties;
                                     var id = item.IATACode;
                                     var name = id + " - " + item.Name;
-                                    map[name] = { id: id, name: id + " " + name, lat: item.lat, lon: item.lon };
+                                    map[name] = { id: id, name: id + " " + name, lat: item.Latititude, lon: item.Longitude };
                                     items.push(name);
                                 });
                             response(items);
@@ -156,7 +156,7 @@ $(document)
                     data: dataInput,
                     success: function(e) {
                         if (e != null)
-                            window.location = "activity/activityresults.html?CriteriaToken=" + e.CriteriaToken;
+                            window.location = "../activity/activityresults.html?CriteriaToken=" + e.CriteriaToken;
                     },
                     error: function(e, o, t) {
                         console.log(e + "\n" + o + "\n" + t);
