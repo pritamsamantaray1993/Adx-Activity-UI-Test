@@ -19,8 +19,8 @@
             </div>
             <div id="Reg" class="box box-noborder">
                 <div class="box-header">
-                    <h3>Available Activities</h3>
-                    <p>Availability results.</p>
+                    <h3>Activity Details</h3>
+                    <p>Selected activity details</p>
                 </div>
                 <div class="box-content" id="maincontainer">
                     <div class="box-content-margin">
@@ -28,64 +28,8 @@
                             <div class="span12" id="historyDiv">
                                 <h4 class="blockTitle">Availability information</h4>
                                 <div class="historical-wrapper">
-                                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                                        <tbody>
-                                            <tr>
-                                                <td class="bordersActivities">
-                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                                                        <tbody>
-                                                            <!--<tr style="display: ">
-                                                                <td colspan="4" class="Activities_results_title">
-                                                                    Activities in {{locationName}}
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td nowrap="nowrap" class="right_pad">
-                                                                    <b>From:</b>&nbsp;
-                                                                </td>
-                                                                <td nowrap="nowrap" class="right_pad">
-                                                                    {{From}}}&nbsp;
-                                                                </td>
-                                                                <td nowrap="nowrap" class="right_pad">
-                                                                    <b>To:</b>&nbsp;
-                                                                </td>
-                                                                <td width="100%">
-                                                                    {{To}}}
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td colspan="4" nowrap="nowrap" class="right_pad">
-                                                                    <b>Results:</b> <span id="spanActivitiesSearchResults">{{totalresults}}</span>
-                                                                </td>
-                                                            </tr>-->
-                                                            <tr id="rowSearchResultsCategories" style="">
-                                                                <td colspan="4" class="top_pad">
-                                                                    <!--Filter goes here-->
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td height="5px"></td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div id="searchResultsDiv" style="visibility: visible;">
-                                                        <div id="activitySearchResults" style="width: 100%; visibility: visible;">
-                                                            <div id="activityholder">
 
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+
                                 </div>
                             </div>
                         </form>
@@ -93,232 +37,68 @@
                 </div>
                 <div class="box-footer">
                     <div class="pull-right buttongroup">
-                        <input id="Back" class="btn btn-small" onclick="window.location = 'Search.html'; return false;" value="Cancel" />
-                        <input id="registerbtn" class="btn btn-medium btn-primary" value="Search" />
+                        <input id="Back" class="btn btn-small" onclick="window.location = 'index.html'; return false;" value="Go Back" />
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script id="tmpl-activity" type="text/mustache-template">
-        {{#ActivityGroup}}
-        <table cellpadding="0" cellspacing="0" width="100%">
+
+<script id="tmpl-activity-description" type="text/mustache-template">
+        {{#activityDetail}}
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" class="bordersActivities">
             <tbody>
+                {{#Description.LongDescription.Fragments}}
                 <tr>
-                    <td><a name="Category585"></a></td>
-                </tr>
-                <tr>
-                    <td class="Title_Category">
-                        {{CategoryName}} &nbsp;
+                    <td style="padding: 8px;">
+                        <b style="font-weight:bold;">{{Type}}</b><br>
+                        {{{Details}}}.
+                        <br><br>
                     </td>
                 </tr>
-                <tr height="8px">
+                {{/Description.LongDescription.Fragments}}
+            </tbody>
+        </table>
+
+        <table id="_ctl0_MainHolder__ctl2_rptActivityThumbs" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse;">
+            <tbody>
+                <tr>
+                    <td>
+                        <b style="font-weight: bold !important">
+                            Media Images
+                        </b>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left">
+                        <table cellpadding="0" cellspacing="0">
+                            <tbody>
+                                <tr>
+                                     {{#MediaDetail.MediaImages}}
+                                    <td class="photo_bg">
+                                        <img name="imgActivityThumb" src="{{.}}" border="0" style="height: 60px; width: 60px;">
+                                    </td>
+                                    {{/MediaDetail.MediaImages}}
+
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                    </td>
                     <td>&nbsp;</td>
                 </tr>
             </tbody>
         </table>
-        {{#ActivityInfo}}
-        <div class="activityOptions">
 
-            <table cellpadding="0" cellspacing="0" width="100%">
-                <tbody>
-                    <tr>
-                        <td class="top_pad">
-                            <table cellpadding="0" cellspacing="0" border="0" width="100%" class="borderActivitie">
-                                <tbody>
-                                    <tr>
-                                        <td class="Activitie_title_box">
-                                            <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                                                <tbody>
-                                                    <tr>
-                                                        <td rowspan="2">
-                                                            <a href="#">
-                                                                <img width="70px" height="70px" src="{{ThumbUrl}}" alt="Niagara Falls Day Tour" name="activityThumb" onerror="this.src ='img/photo-not-available-small.gif'">
-                                                            </a>
-                                                        </td>
-                                                        <td width="100%" valign="top" class="Activitie_title_box_title">
-                                                            <a class="ActivitiyName" href="#">
-                                                                {{ActivityName}}
-                                                            </a>
-                                                        </td>
-                                                        <td valign="top"><img src="img/{{Rating}}Stars.gif"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td valign="top" class="Activitie_title_box_description">
-                                                            {{ShortDescription}}. <br>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="ActivityPricingDetailsNoTop">
-                                            <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                                                <tbody>
-                                                    <tr>
-                                                        <td colspan="2" valign="bottom" style="padding-bottom: 4px"></td>
-                                                        <td class="right_pad" style="padding-bottom: 4px">
-
-                                                            <div>
-                                                                <nobr>
-                                                                    <span id="Adults_1218217">Adult (11+)</span>
-                                                                    <span id="PerPerson_1218217" style="display: none">Per Person</span>
-                                                                </nobr>
-                                                            </div>
-                                                            <select id="ddlActivityAdults_1218217" class="input" style="width: 45px" onchange="changeTotalMargin(1218217)">
-                                                                <option value="1">1</option>
-                                                                <option value="2">2</option>
-                                                                <option value="3">3</option>
-                                                                <option value="4">4</option>
-                                                                <option value="5">5</option>
-                                                                <option value="6">6</option>
-                                                                <option value="7">7</option>
-                                                                <option value="8">8</option>
-                                                                <option value="9">9</option>
-                                                                <option value="10">10</option>
-                                                                <option value="11">11</option>
-                                                                <option value="12">12</option>
-                                                                <option value="13">13</option>
-                                                                <option value="14">14</option>
-                                                                <option value="15">15</option>
-                                                                <option value="16">16</option>
-                                                                <option value="17">17</option>
-                                                                <option value="18">18</option>
-                                                                <option value="19">19</option>
-                                                                <option value="20">20</option>
-                                                            </select>
-
-                                                        </td>
-                                                        <td style="padding-bottom: 4px; height: 38px;">
-
-                                                            <div>
-                                                                <nobr>Child (5-11)</nobr>
-                                                            </div>
-                                                            <select id="ddlActivityChilds_1218217" class="input" style="width: 45px" onchange="changeTotalMargin(1218217)">
-                                                                <option value="0">0</option>
-                                                                <option value="1">1</option>
-                                                                <option value="2">2</option>
-                                                                <option value="3">3</option>
-                                                                <option value="4">4</option>
-                                                                <option value="5">5</option>
-                                                                <option value="6">6</option>
-                                                                <option value="7">7</option>
-                                                                <option value="8">8</option>
-                                                                <option value="9">9</option>
-                                                                <option value="10">10</option>
-                                                                <option value="11">11</option>
-                                                                <option value="12">12</option>
-                                                                <option value="13">13</option>
-                                                                <option value="14">14</option>
-                                                                <option value="15">15</option>
-                                                                <option value="16">16</option>
-                                                                <option value="17">17</option>
-                                                                <option value="18">18</option>
-                                                                <option value="19">19</option>
-                                                                <option value="20">20</option>
-                                                            </select>
-
-                                                        </td>
-                                                        <!-- Margin-->
-                                                        <td style="padding-bottom: 4px; height: 38px;">
-                                                            <div>
-                                                                <nobr>Unit Price</nobr>
-                                                            </div>
-                                                        </td>
-
-                                                    </tr>
-                                                </tbody>
-                                                <tbody style="display: ;" id="tbody_1218217_9/15/2017 12:00:00 AM" name="tbody">
-                                                    {{#ActivityOptions}}
-                                                    <tr class="Activities_line_color">
-                                                        <td style="padding: 3px 0px 3px 0px;">
-                                                            <input style="display: none" checked="checked" onclick="ChangeCategory(1218217, '9/15/2017 12:00:00 AM', 1985135)" value="1985135" name="Radio_1218217_9/15/2017 12:00:00 AM" type="radio">
-                                                        </td>
-                                                        <td width="100%" style="padding: 3px 0px 3px 3px;">
-                                                            {{OptionName}}
-                                                        </td>
-
-                                                        <td nowrap="nowrap" class="align_left right_pad">
-                                                            {{#ShowAdultPrice}}
-                                                            {{AdultPrice.Symbol}}{{AdultPrice.Amount}} &nbsp;
-                                                            {{/ShowAdultPrice}}
-                                                        </td>
-
-
-                                                        <td align="left" nowrap="nowrap" class="align_left right_pad">
-                                                            {{#ShowChildPrice}}
-                                                            {{ChildPrice.Symbol}}{{ChildPrice.Amount}}
-                                                            {{/ShowChildPrice}}
-                                                        </td>
-
-                                                        <td align="left" nowrap="nowrap" class="align_left right_pad">
-                                                            {{UnitPrice.Symbol}}{{UnitPrice.Amount}}
-                                                        </td>
-                                                    </tr>
-                                                    {{/ActivityOptions}}
-                                                </tbody>
-
-                                                <tbody>
-                                                    <tr>
-                                                        <td colspan="5" class="top_pad">
-                                                            <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td nowrap="nowrap">
-                                                                            <a href="#">More Details</a>
-                                                                            &nbsp;
-                                                                        </td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="Activities_discount">
-                                            {{#ShowDiscount}}
-                                            <img id="_ctl0_MainHolder_ActivitySearchResults1_ActivityResult1_Image5" src="img/discount_star.gif" align="absmiddle" border="0">&nbsp;
-                                            {{SpecialOffer}}
-                                            {{/ShowDiscount}}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="Infants_aged">
-                                            {{ChildAgeOffer}}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr height="8px">
-                        <td>&nbsp;</td>
-                    </tr>
-                </tbody>
-            </table>
-
-        </div>
-        {{/ActivityInfo}}
-        {{/ActivityGroup}}
-
+        {{/activityDetail}}
 
     </script>
     <link href="bower_components/assets/css/activityresult.css" rel="stylesheet" />
-    <script src="bower_components/assets/js/Jquery/jquery-2.0.3.min.js"></script>
-    <script src="bower_components/assets/js/Nod/nod.js"></script>
-    <script src="bower_components/assets/js/Bootstrap/bootstrap-datepicker.js"></script>
-    <script src="bower_components/assets/js/Select2/select2.js"></script>
+    <script src="bower_components/assets/js/Jquery/jquery-2.0.3.min.js">
+    </script>
     <script src="bower_components/assets/js/libs/underscore.js"></script>
     <script src="bower_components/assets/js/libs/backbone.js"></script>
     <script src="bower_components/assets/js/libs/mustache.min.js"></script>
-    <script src="bower_components/assets/js/UtilityFramework/moment.min.js"></script>
-    <script src="bower_components/app/activitydetails.js"></script>
+    <script src="bower_components/app/activitydescription.js"></script>
 </body>
 </html>

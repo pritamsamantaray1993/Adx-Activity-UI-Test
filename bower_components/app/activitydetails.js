@@ -82,7 +82,6 @@ $(document)
                     data: dataInput,
                     success: function(e) {
                         if (e != null) {
-                            console.log(e);
                             var htm = Mustache.render(template, self.groupActivityCategory(e));
                             self.$("#activityholder").html(htm);
                         }
