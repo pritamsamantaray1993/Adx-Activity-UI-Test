@@ -162,8 +162,9 @@ textarea {
 
 body {
     margin: 0;
-    font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
-    font-size: 14px;
+
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 13px;
     line-height: 20px;
     color: #333333;
     background-color: #ffffff;
