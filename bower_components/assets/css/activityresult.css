@@ -222,12 +222,12 @@ a:hover.hotelDescription {
     font-size: 18px;
     height: 28px;
     padding-left: 12px;
-    font-weight:bold;
+    font-weight: bold;
 }
 
 .add_tocart_off {
-    color: #ffffff;
-    background: #db1638;
+    color: #fff;
+    background: #f0ad4e;
     border: 0px;
     border-radius: 3px;
 }
@@ -3650,7 +3650,7 @@ a:visited.ActivitiyName {
 
 .Infants_aged {
     padding: 2px 5px;
-	color: blue;
+    color: blue;
 }
 
 .Activities_line_color {
@@ -3685,12 +3685,12 @@ a:visited.ActivitiyName {
     }
 
 .borderActivitie {
- border-radius: 17px;
-border: 1px solid #73AD21  ;
-padding: 20px;
-height: 150px;
-border-collapse: separate;
-width: 100%;
+    border-radius: 17px;
+    border: 1px solid #73AD21;
+    padding: 20px;
+    height: 150px;
+    border-collapse: separate;
+    width: 100%;
 }
 
 .bordersActivities {
@@ -4168,4 +4168,13 @@ div.paging {
 
 #MainTable {
     text-align: left;
+}
+
+
+.bolder-text {
+    font-weight: bold;
+}
+
+.padding15 {
+    padding-top: 15px;
 }

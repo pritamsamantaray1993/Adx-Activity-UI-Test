@@ -52,10 +52,10 @@ $(document)
                     if (isExist.length === 0) {
                         activity.CategoryName = activities[i].ActivityInfo.CategoryName;
                         activity.ActivityInfo = [];
-                        activity.ShowAdultPrice = activities[i].ActivityInfo.OptionType === 2;
+                        activity.ShowAdultPrice = activities[i].ActivityInfo.OptionType !== 1;
                         activity.ShowUnitPrice = activities[i].ActivityInfo.OptionType === 1;
                         activity.ShowDiscount = activities[i].ActivityInfo.SpecialOffer ? true : false;
-                        activity.ShowChildPrice = activities[i].ActivityInfo.OptionType === 2;
+                        activity.ShowChildPrice = activities[i].ActivityInfo.OptionType !== 1;
                         activity.AvailabilityDates = self.findAvailabilityDates(activities[i].ActivityInfo.ActivityOptions);
                         activity.ActivityInfo.push(activities[i].ActivityInfo);
                         activityGroupColection.push(activity);
@@ -81,7 +81,7 @@ $(document)
                     "ActivityName": "",
                     "pageSize": 30,
                     "pageNumber": 1,
-                    "ActivityType": [602],
+                    "ActivityType": [585],
                     "ApplyFiltering": true
                 };
 

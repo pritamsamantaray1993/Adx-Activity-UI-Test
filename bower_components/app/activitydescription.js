@@ -43,7 +43,7 @@ $(document)
                     type: "Get",
                     success: function(e) {
                         if (e != null) {
-                            model.activityDetail = e.PropertyInformation;
+                            model.activityDetail = e;
                             var htm = Mustache.render(template, model);
                             self.$(".historical-wrapper").html(htm);
                         }

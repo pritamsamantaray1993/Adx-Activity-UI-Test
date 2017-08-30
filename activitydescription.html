@@ -3,7 +3,7 @@
 <head>
     <title>Activity Details</title>
     <meta charset="utf-8" />
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <link rel="shortcut icon" type="image/png" href="img/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="" />
@@ -45,10 +45,61 @@
         </div>
     </div>
 
-    <script id="tmpl-activity-description" type="text/mustache-template">
+<script id="tmpl-activity-description" type="text/mustache-template">
         {{#activityDetail}}
 
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" class="bordersActivities">
+            <tbody>
+                <tr>
+                    <td align="left" style="padding: 8px;">
 
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Rating</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{ActivityName}}</td>
+                                    <td>{{CategoryName}}</td>
+                                    <td valign="top">
+                                        <img src="img/{{Rating}}Stars.gif" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr>
+                                    <th>Location</th>
+                                    <th>Address</th>
+                                    <th>Phone Number</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <p>
+                                            Latitude: {{Location.Latitude}}<br />
+                                            Latitude: {{Location.Longitude}}
+                                        </p>
+                                    </td>
+                                    <td>
+                                        {{#Address}}{{Address1}},{{Address2}},{{City}},{{Subdivision}},{{Country}}-{{Zip}}{{/Address}}
+                                    </td>
+                                    <td>{{PhoneNumber}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+        <br />
 
         <table cellpadding="0" cellspacing="0" border="0" width="100%" class="bordersActivities">
             <tbody>
@@ -62,21 +113,50 @@
                 </tr>
                 <tr>
                     <td align="left" style="padding: 8px;">
-					<div style="max-width: 1050px;overflow: auto;overflow-y: hidden;">
-                        <table cellpadding="0" cellspacing="0">
-                            <tbody>
-                                <tr>
-                                    {{#MediaDetail.MediaImages}}
-                                    <td class="photo_bg">
-                                        <img name="imgActivityThumb" src="{{.}}" border="0" style="height: 200px; width: 200px;">
-                                    </td>
-                                    <td style="padding-left:10px;"></td>
-                                    {{/MediaDetail.MediaImages}}
+                        <div style="max-width: 1050px;overflow: auto;overflow-y: hidden;">
+                            <table cellpadding="0" cellspacing="0">
+                                <tbody>
+                                    <tr>
+                                        {{#PropertyInformation.MediaDetail.MediaImages}}
+                                        <td class="photo_bg">
+                                            <img name="imgActivityThumb" src="{{.}}" border="0" style="height: 200px; width: 200px;">
+                                        </td>
+                                        <td style="padding-left:10px;"></td>
+                                        {{/PropertyInformation.MediaDetail.MediaImages}}
 
-                                </tr>
-                            </tbody>
-                        </table>
-						</div>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px;">
+                        <b style="font-weight: bold !important">
+                            Media Videos
+                        </b>
+                    </td>
+                    <td style="padding-left:10px;"></td>
+                </tr>
+                <tr>
+                    <td align="left" style="padding: 8px;">
+                        <div style="max-width: 1050px;overflow: auto;overflow-y: hidden;">
+                            <table cellpadding="0" cellspacing="0">
+                                <tbody>
+                                    <tr>
+                                        {{#PropertyInformation.MediaDetail.MediaMovie}}
+                                        <td class="photo_bg">
+                                            <iframe width="420" height="315" src="{{.}}" frameborder="0" allowfullscreen></iframe>
+                                        </td>
+                                        <td style="padding-left:10px;"></td>
+                                        {{/PropertyInformation.MediaDetail.MediaMovie}}
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                         <br>
                     </td>
                     <td>&nbsp;</td>
@@ -88,7 +168,23 @@
         <br />
         <table cellpadding="0" cellspacing="0" border="0" width="100%" class="bordersActivities">
             <tbody>
-                {{#Description.LongDescription.Fragments}}
+                <tr>
+                    <td style="padding: 8px;">
+                        <b style="font-weight:bold !important;">Description</b><br>
+                        <span style="white-space: pre-line">
+                            {{{PropertyInformation.Description.ShortDescription}}}
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px;">
+                        <b style="font-weight:bold !important;">Voucher Remarks</b><br>
+                        <span style="white-space: pre-line">
+                            {{{PropertyInformation.Description.LongDescription.VoucherRemarks}}}
+                        </span>
+                    </td>
+                </tr>
+                {{#PropertyInformation.Description.LongDescription.Fragments}}
                 <tr>
                     <td style="padding: 8px;">
                         <b style="font-weight:bold !important;">{{Type}}</b><br>
@@ -97,7 +193,7 @@
                         </span>
                     </td>
                 </tr>
-                {{/Description.LongDescription.Fragments}}
+                {{/PropertyInformation.Description.LongDescription.Fragments}}
             </tbody>
         </table>
 

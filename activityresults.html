@@ -200,7 +200,9 @@
                                                         <!-- Margin-->
                                                         <td style="padding-bottom: 4px; height: 38px;">
                                                             <div>
+                                                                {{#ShowUnitPrice}}
                                                                 <nobr>Unit Price</nobr>
+                                                                {{/ShowUnitPrice}}
                                                             </div>
                                                         </td>
 
@@ -230,7 +232,9 @@
                                                         </td>
 
                                                         <td align="left" nowrap="nowrap" class="pull-right">
+                                                            {{#ShowUnitPrice}}
                                                             {{UnitPrice.Symbol}}{{UnitPrice.Amount}}
+                                                            {{/ShowUnitPrice}}
                                                         </td>
                                                     </tr>
                                                     {{/ActivityOptions}}
@@ -264,7 +268,10 @@
                                     </tr>
                                     <tr>
                                         <td class="Infants_aged" style="font-style: italic;">
-                                            **{{ChildAgeOffer}}**
+                                            **{{ChildAgeOffer}}** 
+                                            <span style="padding-top:3px;" class="pull-right">
+                                                <button class="btn btn-warning btn-medium" activityOptionid="{{OptionId}}">Select</button>
+                                            </span>
                                         </td>
                                     </tr>
                                 </tbody>
