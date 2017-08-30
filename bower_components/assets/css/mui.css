@@ -162,7 +162,7 @@ textarea {
 
 body {
     margin: 0;
-    font-family: "Arial, Helvetica Neue", Helvetica, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
     font-size: 14px;
     line-height: 20px;
     color: #333333;
@@ -690,7 +690,6 @@ h6 {
     font-weight: bold;
     line-height: 20px;
     color: inherit;
-    /*This property is Commented as it was creating problem in Updated Version (39) of Chrome - By MADHUR 24 Nov'14*/
 }
 
     h1 small,
@@ -927,7 +926,7 @@ ol ul {
 code,
 pre {
     padding: 0 3px 2px;
-    font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+    font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
     font-size: 9px;
     color: #333333;
     -webkit-border-radius: 3px;
@@ -1020,7 +1019,7 @@ input,
 button,
 select,
 textarea {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
 }
 
 label {
@@ -5045,7 +5044,7 @@ ul.nav.nav-pills.nav-stacked {
     .navbar-search .search-query {
         margin-bottom: 0;
         padding: 4px 14px;
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
         font-size: 13px;
         font-weight: normal;
         line-height: 1;
@@ -5515,7 +5514,7 @@ ul.nav.nav-pills.nav-stacked {
     .navbar .navbar-search > input.search-query {
         margin-bottom: 0;
         padding: 4px 14px;
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
         font-size: 13px;
         font-weight: normal;
         line-height: 1;
