@@ -3685,8 +3685,12 @@ a:visited.ActivitiyName {
     }
 
 .borderActivitie {
-    border: #d5d5d5 1px solid;
-    width: 100%;
+ order-radius: 17px;
+border: 1px solid #73AD21  ;
+padding: 20px;
+height: 150px;
+border-collapse: separate;
+width: 100%;
 }
 
 .bordersActivities {
