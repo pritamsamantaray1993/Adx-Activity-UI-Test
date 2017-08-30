@@ -31,43 +31,6 @@
                                     <table cellpadding="0" cellspacing="0" border="0" width="100%">
                                         <tbody>
                                             <tr>
-                                                <td class="bordersActivities">
-                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                                                        <tbody>
-                                                            <!--<tr style="display: ">
-                                                                <td colspan="4" class="Activities_results_title">
-                                                                    Activities in {{locationName}}
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td nowrap="nowrap" class="right_pad">
-                                                                    <b>From:</b>&nbsp;
-                                                                </td>
-                                                                <td nowrap="nowrap" class="right_pad">
-                                                                    {{From}}}&nbsp;
-                                                                </td>
-                                                                <td nowrap="nowrap" class="right_pad">
-                                                                    <b>To:</b>&nbsp;
-                                                                </td>
-                                                                <td width="100%">
-                                                                    {{To}}}
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td colspan="4" nowrap="nowrap" class="right_pad">
-                                                                    <b>Results:</b> <span id="spanActivitiesSearchResults">{{totalresults}}</span>
-                                                                </td>
-                                                            </tr>-->
-                                                            <tr id="rowSearchResultsCategories" style="">
-                                                                <td colspan="4" class="top_pad">
-                                                                    <!--Filter goes here-->
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            <tr>
                                                 <td height="5px"></td>
                                             </tr>
                                             <tr>
@@ -100,7 +63,7 @@
             </div>
         </div>
     </div>
-    <script id="tmpl-activity" type="text/mustache-template">
+<script id="tmpl-activity" type="text/mustache-template">
         {{#ActivityGroup}}
         <table cellpadding="0" cellspacing="0" width="100%">
             <tbody>
@@ -137,7 +100,7 @@
                                                             </a>
                                                         </td>
                                                         <td width="100%" valign="top" class="Activitie_title_box_title">
-                                                            <a class="ActivitiyName" href="#">
+                                                            <a class="ActivitiyName" target="_blank" href="../activity/activitydescription.html?SearchQualifier={{SearchQualifier}}">
                                                                 {{ActivityName}}
                                                             </a>
                                                         </td>
@@ -145,7 +108,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td valign="top" class="Activitie_title_box_description">
-                                                            {{ShortDescription}}. <br>
+                                                            {{ShortDescription}} <br>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -160,9 +123,19 @@
                                             <table cellpadding="0" cellspacing="0" border="0" width="100%">
                                                 <tbody>
                                                     <tr>
-                                                        <td colspan="2" valign="bottom" style="padding-bottom: 4px"></td>
-                                                        <td class="right_pad" style="padding-bottom: 4px">
+                                                        <td colspan="2" valign="bottom" style="padding-bottom: 4px">
 
+                                                            <b>Select available date:</b>&nbsp;
+                                                            <select id="ddlActivityAvailableDates_{{ActivityCode}}" ui-select2 class="input" style="width: 192px;" onchange="SelectActivityDate(1218245)">
+                                                                {{#AvailabilityDates}}
+                                                                <option value="{{.}}">{{.}}</option>
+                                                                {{/AvailabilityDates}}
+                                                            </select>
+
+
+                                                        </td>
+                                                        <td class="right_pad" style="padding-bottom: 4px">
+                                                            {{#ShowAdultPrice}}
                                                             <div>
                                                                 <nobr>
                                                                     <span id="Adults_1218217">Adult (11+)</span>
@@ -191,10 +164,10 @@
                                                                 <option value="19">19</option>
                                                                 <option value="20">20</option>
                                                             </select>
-
+                                                            {{/ShowAdultPrice}}
                                                         </td>
                                                         <td style="padding-bottom: 4px; height: 38px;">
-
+                                                            {{#ShowChildPrice}}
                                                             <div>
                                                                 <nobr>Child (5-11)</nobr>
                                                             </div>
@@ -221,7 +194,7 @@
                                                                 <option value="19">19</option>
                                                                 <option value="20">20</option>
                                                             </select>
-
+                                                            {{/ShowChildPrice}}
                                                         </td>
                                                         <!-- Margin-->
                                                         <td style="padding-bottom: 4px; height: 38px;">
@@ -232,11 +205,11 @@
 
                                                     </tr>
                                                 </tbody>
-                                                <tbody style="display: ;" id="tbody_1218217_9/15/2017 12:00:00 AM" name="tbody">
+                                                <tbody style="display: ;" class="activityOptionstbody" name="tbody">
                                                     {{#ActivityOptions}}
-                                                    <tr class="Activities_line_color">
-                                                        <td style="padding: 3px 0px 3px 0px;">
-                                                            
+                                                    <tr>
+                                                        <td style="padding: 0px 10px 7px 0px;">
+                                                            <input value="{{OptionId}}" name="Radio_{{OptionId}}" type="radio">
                                                         </td>
                                                         <td width="100%" style="padding: 3px 0px 3px 3px;">
                                                             {{OptionName}}
@@ -255,7 +228,7 @@
                                                             {{/ShowChildPrice}}
                                                         </td>
 
-                                                        <td align="left" nowrap="nowrap" class="align_left right_pad">
+                                                        <td align="left" nowrap="nowrap" class="pull-right">
                                                             {{UnitPrice.Symbol}}{{UnitPrice.Amount}}
                                                         </td>
                                                     </tr>
@@ -269,7 +242,7 @@
                                                                 <tbody>
                                                                     <tr>
                                                                         <td nowrap="nowrap">
-                                                                            <a target="_blank" href="../activity/activitydescription.html?SearchQualifier={{SearchQualifier}}">More Details</a>
+                                                                            <a target="_blank" href="../activity/activitydescription.html?SearchQualifier={{SearchQualifier}}">Show Details>></a>
                                                                             &nbsp;
                                                                         </td>
                                                                     </tr>
@@ -290,8 +263,8 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="Infants_aged">
-                                            {{ChildAgeOffer}}
+                                        <td class="Infants_aged" style="font-style: italic;">
+                                            **{{ChildAgeOffer}}**
                                         </td>
                                     </tr>
                                 </tbody>

@@ -22,6 +22,10 @@ $(document)
                 this.doAvailabilitySearch();
             },
 
+            initControls: function () {
+                $('select').select2();
+            },
+
             getParameterByName:function(name, url) {
                 if (!url) url = window.location.href;
                 name = name.replace(/[\[\]]/g, "\\$&");
@@ -32,7 +36,12 @@ $(document)
                 return decodeURIComponent(results[2].replace(/\+/g, " "));
             },
 
+            findAvailabilityDates: function(activityOptions) {
+                return _.uniq(_.pluck(activityOptions, 'AvailableFromDate'));
+            },
+
             groupActivityCategory: function (activities) {
+                var self = this;
                 activities = activities.Results;
                 var activityGroupColection = [], toJsonModel = { ActivityGroup: [] }, activity = {}, i;
                 for (i = 0; i < activities.length; i++) {
@@ -43,11 +52,11 @@ $(document)
                     if (isExist.length === 0) {
                         activity.CategoryName = activities[i].ActivityInfo.CategoryName;
                         activity.ActivityInfo = [];
-                        activity.ShowAdultPrice = activities[i].ActivityInfo.AdultPrice &&
-                            activities[i].ActivityInfo.AdultPrice.Amount > 0;
+                        activity.ShowAdultPrice = activities[i].ActivityInfo.OptionType === 2;
+                        activity.ShowUnitPrice = activities[i].ActivityInfo.OptionType === 1;
                         activity.ShowDiscount = activities[i].ActivityInfo.SpecialOffer ? true : false;
-                        activity.ShowChildPrice = activities[i].ActivityInfo.ChildPrice &&
-                            activities[i].ActivityInfo.ChildPrice.Amount > 0;
+                        activity.ShowChildPrice = activities[i].ActivityInfo.OptionType === 2;
+                        activity.AvailabilityDates = self.findAvailabilityDates(activities[i].ActivityInfo.ActivityOptions);
                         activity.ActivityInfo.push(activities[i].ActivityInfo);
                         activityGroupColection.push(activity);
                     } else {
@@ -84,6 +93,8 @@ $(document)
                         if (e != null) {
                             var htm = Mustache.render(template, self.groupActivityCategory(e));
                             self.$("#activityholder").html(htm);
+                            self.applyActivityOptionsAlternateRowColor();
+                            self.initControls();
                         }
                            
                     },
@@ -93,6 +104,13 @@ $(document)
                 });
                 return true;
 
+            },
+
+            applyActivityOptionsAlternateRowColor: function () {
+                this.$('.activityOptionstbody').each(function() {
+                    $(this).find('tr:even').addClass('Activities_line_color');
+                });
+                
             },
 
             // Backbone View events ...
