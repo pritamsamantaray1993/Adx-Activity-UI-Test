@@ -3,7 +3,7 @@
 <head>
     <title>Availability Results</title>
     <meta charset="utf-8" />
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <link rel="shortcut icon" type="image/png" href="img/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="" />
@@ -27,7 +27,6 @@
                     <div class="box-content-margin">
                         <form id="RegMetadata" class="form-float">
                             <div class="span12" id="historyDiv">
-                                <h4 class="blockTitle">Availability information</h4>
                                 <div class="historical-wrapper">
                                     <table cellpadding="0" cellspacing="0" border="0" width="100%">
                                         <tbody>
@@ -42,7 +41,12 @@
                                                     <div id="searchResultsDiv" style="visibility: visible;">
                                                         <div id="activitySearchResults" style="width: 100%; visibility: visible;">
                                                             <div id="activityholder">
-
+                                                                <div class="widget-loading" style="display: block;text-align: center;margin-top: auto;margin-top: 5%;margin-bottom: auto;vertical-align: middle;">
+                                                                    <div class="title">Please wait while we process your request.</div>
+                                                                    <div>
+                                                                        <img src="img/loading-bar.gif" alt="Loading." title="Loading...">
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -57,14 +61,14 @@
                 </div>
                 <div class="box-footer">
                     <div class="pull-right buttongroup">
-                        <input id="Back" class="btn btn-small" onclick="window.location = 'index.html'; return false;" value="Cancel" />
+                        <input id="Back" class="btn btn-small" onclick="window.location = 'index.html'; return false;" value="Back" />
                         <input id="registerbtn" class="btn btn-medium btn-primary" value="Search" />
                     </div>
                 </div>
             </div>
         </div>
     </div>
-<script id="tmpl-activity" type="text/mustache-template">
+    <script id="tmpl-activity" type="text/mustache-template">
         {{#ActivityGroup}}
         <table cellpadding="0" cellspacing="0" width="100%">
             <tbody>
@@ -246,7 +250,7 @@
                                                             <table cellpadding="0" cellspacing="0" border="0" width="100%">
                                                                 <tbody>
                                                                     <tr>
-                                                                        <td nowrap="nowrap">                                                                          
+                                                                        <td nowrap="nowrap">
                                                                             &nbsp;
                                                                         </td>
                                                                     </tr>
@@ -268,7 +272,7 @@
                                     </tr>
                                     <tr>
                                         <td class="Infants_aged" style="font-style: italic;">
-                                            **{{ChildAgeOffer}}** 
+                                            **{{ChildAgeOffer}}**
                                             <span style="padding-top:3px;" class="pull-right">
                                                 <button class="btn btn-warning btn-medium" activityOptionid="{{OptionId}}">Select</button>
                                             </span>
@@ -286,6 +290,33 @@
 
         </div>
         {{/ActivityInfo}}
+        {{/ActivityGroup}}
+
+        {{^ActivityGroup}}
+        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tbody>
+                <tr>
+                    <td height="5px"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="searchResultsDiv" style="visibility: visible;">
+                            <div id="activitySearchResults" style="width: 100%; visibility: visible;">
+                                <div id="activityholder">
+                                    <div class="widget-loading" style="color:#02AFEF;display: block;text-align: center;margin-top: auto;margin-top: 5%;margin-bottom: auto;vertical-align: middle;">
+                                        <div class="title">No results found for your search criteria. Please modify your search and try again.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
         {{/ActivityGroup}}
 
 

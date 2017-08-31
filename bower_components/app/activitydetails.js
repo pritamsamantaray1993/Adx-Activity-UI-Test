@@ -79,9 +79,9 @@ $(document)
                     "MinDistance": null,
                     "MaxDistance": null,
                     "ActivityName": "",
-                    "pageSize": 30,
+                    "pageSize": 100,
                     "pageNumber": 1,
-                    "ActivityType": [585],
+                    "ActivityType": [0],
                     "ApplyFiltering": true
                 };
 

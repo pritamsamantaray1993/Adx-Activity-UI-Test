@@ -27,9 +27,13 @@
                     <div class="box-content-margin">
                         <form id="RegMetadata" class="form-float">
                             <div class="span12" id="historyDiv">
-                                <h4 class="blockTitle">Activity details</h4>
                                 <div class="historical-wrapper">
-
+                                    <div class="widget-loading" style="display: block;text-align: center;margin-top: auto;margin-top: 5%;margin-bottom: auto;vertical-align: middle;">
+                                        <div class="title">Please wait while we process your request.</div>
+                                        <div>
+                                            <img src="img/loading-bar.gif" alt="Loading." title="Loading...">
+                                        </div>
+                                    </div>
 
                                 </div>
                             </div>
@@ -38,14 +42,14 @@
                 </div>
                 <div class="box-footer">
                     <div class="pull-right buttongroup">
-                        <input id="Back" class="btn btn-small" onclick="window.location = 'index.html'; return false;" value="Go Back" />
+                        <input id="Back" class="btn btn-small" onclick="window.location = 'index.html'; return false;" value="Back" />
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-<script id="tmpl-activity-description" type="text/mustache-template">
+    <script id="tmpl-activity-description" type="text/mustache-template">
         {{#activityDetail}}
 
         <table cellpadding="0" cellspacing="0" border="0" width="100%" class="bordersActivities">
@@ -117,12 +121,12 @@
                             <table cellpadding="0" cellspacing="0">
                                 <tbody>
                                     <tr>
-                                        {{#PropertyInformation.MediaDetail.MediaImages}}
+                                        {{#DetailedDescription.MediaDetail.MediaImages}}
                                         <td class="photo_bg">
                                             <img name="imgActivityThumb" src="{{.}}" border="0" style="height: 200px; width: 200px;">
                                         </td>
                                         <td style="padding-left:10px;"></td>
-                                        {{/PropertyInformation.MediaDetail.MediaImages}}
+                                        {{/DetailedDescription.MediaDetail.MediaImages}}
 
                                     </tr>
                                 </tbody>
@@ -146,12 +150,12 @@
                             <table cellpadding="0" cellspacing="0">
                                 <tbody>
                                     <tr>
-                                        {{#PropertyInformation.MediaDetail.MediaMovie}}
+                                        {{#DetailedDescription.MediaDetail.MediaMovie}}
                                         <td class="photo_bg">
                                             <iframe width="420" height="315" src="{{.}}" frameborder="0" allowfullscreen></iframe>
                                         </td>
                                         <td style="padding-left:10px;"></td>
-                                        {{/PropertyInformation.MediaDetail.MediaMovie}}
+                                        {{/DetailedDescription.MediaDetail.MediaMovie}}
 
                                     </tr>
                                 </tbody>
@@ -172,7 +176,7 @@
                     <td style="padding: 8px;">
                         <b style="font-weight:bold !important;">Description</b><br>
                         <span style="white-space: pre-line">
-                            {{{PropertyInformation.Description.ShortDescription}}}
+                            {{{ShortDescription}}}
                         </span>
                     </td>
                 </tr>
@@ -180,11 +184,11 @@
                     <td style="padding: 8px;">
                         <b style="font-weight:bold !important;">Voucher Remarks</b><br>
                         <span style="white-space: pre-line">
-                            {{{PropertyInformation.Description.LongDescription.VoucherRemarks}}}
+                            {{{DetailedDescription.LongDescription.VoucherRemarks}}}
                         </span>
                     </td>
                 </tr>
-                {{#PropertyInformation.Description.LongDescription.Fragments}}
+                {{#DetailedDescription.LongDescription.DescriptionParts}}
                 <tr>
                     <td style="padding: 8px;">
                         <b style="font-weight:bold !important;">{{Type}}</b><br>
@@ -193,7 +197,7 @@
                         </span>
                     </td>
                 </tr>
-                {{/PropertyInformation.Description.LongDescription.Fragments}}
+                {{/DetailedDescription.LongDescription.DescriptionParts}}
             </tbody>
         </table>
 

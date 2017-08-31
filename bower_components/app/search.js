@@ -68,8 +68,8 @@ $(document)
                         function(ev) {
                             $('.activitydate').datepicker('hide');
                         });
-                $("#startdate").datepicker('setDate', moment().toDate());
-                $("#enddate").datepicker('setDate', moment().add(2, 'days').toDate());
+                $("#startdate").datepicker('setDate', moment().add(1, 'months').toDate());
+                $("#enddate").datepicker('setDate', moment().add(3, 'days').add(1, 'month').toDate());
             },
 
             findAddress: function() {
