@@ -68,7 +68,7 @@
             </div>
         </div>
     </div>
-    <script id="tmpl-activity" type="text/mustache-template">
+<script id="tmpl-activity" type="text/mustache-template">
         {{#ActivityGroup}}
         <table cellpadding="0" cellspacing="0" width="100%">
             <tbody>
@@ -293,6 +293,7 @@
         {{/ActivityGroup}}
 
         {{^ActivityGroup}}
+    {{^errorData}}
         <table cellpadding="0" cellspacing="0" border="0" width="100%">
             <tbody>
                 <tr>
@@ -316,10 +317,36 @@
                 </tr>
             </tbody>
         </table>
-
+    {{/errorData}}
+    {{#errorData}}
+    {{#ErrorCoccured}}
+    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+        <tbody>
+            <tr>
+                <td height="5px"></td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    <div id="searchResultsDiv" style="visibility: visible;">
+                        <div id="activitySearchResults" style="width: 100%; visibility: visible;">
+                            <div id="activityholder">
+                                <div class="widget-loading" style="color:#ff0000;display: block;text-align: center;margin-top: auto;margin-top: 5%;margin-bottom: auto;vertical-align: middle;">
+                                    <div class="title">An error occured. Please contact our admin. Request Id: {{errorDto.RequestId}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    {{/ErrorCoccured}}
+    {{/errorData}}
         {{/ActivityGroup}}
-
-
+    
     </script>
     <link href="bower_components/assets/css/activityresult.css" rel="stylesheet" />
     <script src="bower_components/assets/js/Jquery/jquery-2.0.3.min.js"></script>

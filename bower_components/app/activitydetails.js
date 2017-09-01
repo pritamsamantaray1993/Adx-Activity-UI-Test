@@ -41,7 +41,7 @@ $(document)
             },
 
             groupActivityCategory: function (activities) {
-                var self = this;
+                var self = this, activityOption = {};
                 activities = activities.Results;
                 var activityGroupColection = [], toJsonModel = { ActivityGroup: [] }, activity = {}, i;
                 for (i = 0; i < activities.length; i++) {
@@ -50,12 +50,17 @@ $(document)
                             return group.CategoryName === activities[i].ActivityInfo.CategoryName;
                         });
                     if (isExist.length === 0) {
+                        activity = {};
+                        if (activities[i].ActivityInfo.ActivityOptions &&
+                            activities[i].ActivityInfo.ActivityOptions.length > 0) {
+                            activityOption = activities[i].ActivityInfo.ActivityOptions[0];
+                        }
                         activity.CategoryName = activities[i].ActivityInfo.CategoryName;
                         activity.ActivityInfo = [];
-                        activity.ShowAdultPrice = activities[i].ActivityInfo.OptionType !== 1;
-                        activity.ShowUnitPrice = activities[i].ActivityInfo.OptionType === 1;
+                        activity.ShowAdultPrice = activityOption && activityOption.OptionType !== 1;
+                        activity.ShowUnitPrice = activityOption && activityOption.OptionType === 1;
                         activity.ShowDiscount = activities[i].ActivityInfo.SpecialOffer ? true : false;
-                        activity.ShowChildPrice = activities[i].ActivityInfo.OptionType !== 1;
+                        activity.ShowChildPrice = activityOption && activityOption.OptionType !== 1;
                         activity.AvailabilityDates = self.findAvailabilityDates(activities[i].ActivityInfo.ActivityOptions);
                         activity.ActivityInfo.push(activities[i].ActivityInfo);
                         activityGroupColection.push(activity);
@@ -98,7 +103,13 @@ $(document)
                         }
                            
                     },
-                    error: function(e, o, t) {
+                    error: function (e, o, t) {
+                        e.ActivityGroup = {};
+                        e.ErrorCoccured = true;
+                        e.errorDto = JSON.parse(e.responseText);
+                        var errorDetails = { errorData: e };
+                        var htm = Mustache.render(template, errorDetails);
+                        self.$("#activityholder").html(htm);
                         console.log(e + "\n" + o + "\n" + t);
                     }
                 });
