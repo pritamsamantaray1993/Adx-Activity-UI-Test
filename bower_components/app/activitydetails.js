@@ -12,7 +12,7 @@ $(document)
         /**
          * Backbone view.
          **/
-
+		var selectedActivities = [];
         window.AppView = Backbone.View.extend({
             el: $(".totalstaybooking"),
 
@@ -74,8 +74,10 @@ $(document)
 
             doAvailabilitySearch: function(e) {
                 var template,
+					searchTemplate,
                     self = this;
                 template = $("#tmpl-activity").html();
+				searchTemplate = $("#tmpl-search-criteria").html();
                 var dataInput = {
                     "MinPrice": null,
                     "MaxPrice": null,
@@ -89,13 +91,20 @@ $(document)
                     "ActivityType": [0],
                     "ApplyFiltering": true
                 };
-
+			
+							
                 $.ajax({
                     url: "../api/catalog/activity/availability/" + self.getParameterByName('CriteriaToken'),
                     type: "POST",
                     data: dataInput,
                     success: function(e) {
                         if (e != null) {
+														
+							//Search criteria
+							var searchCriteria = Storage.prototype.getObject("searchCriteria");
+							 var htmSearch = Mustache.render(searchTemplate, searchCriteria);
+							 self.$("#SearchCriteriaPlaceHolder").html(htmSearch);
+				 
                             var htm = Mustache.render(template, self.groupActivityCategory(e));
                             self.$("#activityholder").html(htm);
                             self.applyActivityOptionsAlternateRowColor();
@@ -124,10 +133,63 @@ $(document)
                 
             },
 
+			doCheckout: function(){
+				if(selectedActivities.length === 0){
+					alert("Please short list one activity");
+					return;
+				}
+				Storage.prototype.setObject("selectedActivities",selectedActivities);
+			},
+			shortlistActivity: function(e){
+				var anyOptionSelected,
+				activityCode,
+				clsToLoop,
+				activityDate,
+				adultCount,
+				childCount,
+				unitCount,
+				
+				anyOptionSelected = false;
+				activityCode = e.currentTarget.getAttribute("activityCode");
+				clsToLoop = $("input.rdo-" + activityCode);
+				if( clsToLoop.filter(':checked').length == 0){
+					alert("Please select an option.");
+					return;
+				}
+				
+				activityDate = $('#ddlActivityAvailableDates_' + activityCode)["0"].value;
+				if($('#ddlActivityAdults_' + activityCode)["0"]){
+					adultCount = $('#ddlActivityAdults_' + activityCode)["0"].value;
+					childCount = $('#ddlActivityChilds_' + activityCode)["0"].value;
+				}
+				if($('#ddlActivityUnits_' + activityCode)["0"]){
+					unitCount = $('#ddlActivityUnits_' + activityCode)["0"].value;
+				}
+				
+				_.each(clsToLoop, function(rdo){
+					if($(rdo).is(':checked')){
+						var myObject = new Object();
+						myObject.ActivityCode = activityCode;
+						myObject.ActivityOption = rdo.value;
+						myObject.Date = activityDate;
+						myObject.Adult = adultCount;
+						myObject.Child = childCount;
+						myObject.Unit = unitCount;
+						selectedActivities.push({
+							key:   e.currentTarget.getAttribute("activityCode"),
+							value: myObject
+						});
+						anyOptionSelected = true;
+					}					
+				})
+				
+				$(e.currentTarget).attr("disabled", true);
+			},
             // Backbone View events ...
 
             events: {
-                "click #registerbtn": "doAvailabilitySearch"
+                "click #btnCheckout": "doCheckout",
+				"click .btn-activity-shortlist": "shortlistActivity"
             }
 
         });

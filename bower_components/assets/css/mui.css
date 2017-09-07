@@ -10370,6 +10370,7 @@ form .box-footer {
 
 .box-noborder {
     border: medium none;
+	border-radius: 50px;
 }
 
     .box-noborder > .box-header {
@@ -14892,6 +14893,21 @@ intentbuttons-radio button i {
 }
 /*#endregion*/
 
+.pagesearchheaderName{
+	font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
+    color: #858C8E;
+    font-size: 12px;
+    text-transform: uppercase;
+	font-weight: bold;
+	padding-left:10px;
+}
+
+.pagesearchheaderValue{
+	font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
+    color: #858C8E;
+    font-size: 12px;
+	padding-left:10px;
+}
 
 .totalstaybooking {
     margin: auto !important;
@@ -14928,12 +14944,14 @@ intentbuttons-radio button i {
         background-color: #ffffff;
     }
 
+	
         .totalstaybooking .box .box-header {
             margin: 0px !important;
             color: #888;
-            height: 60px !important;
+            height: 110px !important;
             padding: 5px 20px;
             position: relative !important;
+			border-bottom: none;
         }
 
             .totalstaybooking .box .box-header h1,
@@ -15157,3 +15175,4 @@ intentbuttons-radio button i {
                     .totalstaybooking .box .box-footer .buttongroup .btn:last-child {
                         margin: 0px !important;
                     }
+

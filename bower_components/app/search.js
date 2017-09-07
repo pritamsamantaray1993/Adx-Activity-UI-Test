@@ -149,7 +149,8 @@ $(document)
                         }
                     ]
                 };
-
+				//Set to local cache
+				Storage.prototype.setObject("searchCriteria",dataInput);
                 $.ajax({
                     url: "../api/catalog/activity/availabilitycriteria",
                     type: "POST",

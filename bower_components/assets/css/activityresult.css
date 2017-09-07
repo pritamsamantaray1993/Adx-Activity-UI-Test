@@ -215,14 +215,14 @@ a:hover.hotelDescription {
 
 .Title_Category {
     background-color: #AFB8BD;
-    background-image: none;
-    border-left: 0px solid #D5D5D5;
-    border-right: 0px solid #D5D5D5;
-    color: #FFFFFF;
-    font-size: 18px;
-    height: 28px;
-    padding-left: 12px;
-    font-weight: bold;
+    font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
+    color: white;
+    font-size: 20px;
+    text-transform: uppercase;
+	font-weight: bold;
+	padding-left:10px;
+	padding:10px;
+	border-radius:5px;
 }
 
 .add_tocart_off {
@@ -3685,12 +3685,13 @@ a:visited.ActivitiyName {
     }
 
 .borderActivitie {
-    border-radius: 17px;
-    border: 1px solid #73AD21;
+    border-radius: 10px;
+    border: 1px solid gray;
     padding: 20px;
     height: 150px;
     border-collapse: separate;
     width: 100%;
+	background-color:#E0E6E8;
 }
 
 .bordersActivities {
