@@ -35,15 +35,22 @@ $(document)
 
             getActivityDescription: function(e) {
                 var template,
+				    searchTemplate,
                     self = this,
                     model = {};
                 template = $("#tmpl-activity-description").html();
+				searchTemplate = $("#tmpl-search-criteria").html();
                 $.ajax({
                     url: "../api/catalog/activity/details/" + self.getParameterByName('SearchQualifier'),
                     type: "Get",
                     success: function(e) {
                         if (e != null) {
-                            model.activityDetail = e;
+                            
+							var searchCriteria = Storage.prototype.getObject("searchCriteria");
+							 var htmSearch = Mustache.render(searchTemplate, searchCriteria);
+							 self.$("#SearchCriteriaPlaceHolder").html(htmSearch);
+							
+							model.activityDetail = e;							
                             var htm = Mustache.render(template, model);
                             self.$(".historical-wrapper").html(htm);
                         }

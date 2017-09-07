@@ -18,11 +18,15 @@
             <div title="" class="header bsiLogo">
                 <img id="loginpageTitle" onclick="window.location = 'index.html'; return false;" src="img/travel-edge-adx.small.png" alt="Logo" />
             </div>
-            <div id="Reg" class="box box-noborder">
+            <div id="reg" class="box box-noborder">
                 <div class="box-header">
                     <h3>Available Activities</h3>
-                    <p>Availability results.</p>
+					<div id ="SearchCriteriaPlaceHolder"></div>
                 </div>
+				<div style="padding-left:20px;">
+					<div id="shortListedActivities"></div>
+					<div class="pull-right"> <input id="btnCheckout" class="btn btn-primary" value="Proceed to checkout" style="width:100px; margin-right:15px;" /></div>
+				</div>
                 <div class="box-content" id="maincontainer">
                     <div class="box-content-margin">
                         <form id="RegMetadata" class="form-float">
@@ -60,15 +64,32 @@
                     </div>
                 </div>
                 <div class="box-footer">
-                    <div class="pull-right buttongroup">
-                        <input id="Back" class="btn btn-small" onclick="window.location = 'index.html'; return false;" value="Back" />
-                        <input id="registerbtn" class="btn btn-medium btn-primary" value="Search" />
-                    </div>
+                    
                 </div>
             </div>
         </div>
     </div>
+<script id="tmpl-search-criteria" type="text/mustache-template">
+
+                    <div style="background-color: #E0E6E8; padding: 11px; border-radius: 5px;">
+						<table style="width:100%">
+							<tr>
+								<td class="pagesearchheaderName">DESTINATION</td>
+								<td class="pagesearchheaderValue">{{Destination.Description}}</td>
+								<td class="pagesearchheaderName">POPULARITY</td>
+								<td class="pagesearchheaderValue">{{MinRating}} - {{MaxRating}} Stars</td>
+							</tr>
+							<tr>
+								<td class="pagesearchheaderName">START DATE</td>
+								<td class="pagesearchheaderValue">{{StartDate}}</td>
+								<td class="pagesearchheaderName">END DATE</td>
+								<td class="pagesearchheaderValue">{{EndDate}}</td>
+							</tr>
+						</table>
+					</div>
+</script>
 <script id="tmpl-activity" type="text/mustache-template">
+
         {{#ActivityGroup}}
         <table cellpadding="0" cellspacing="0" width="100%">
             <tbody>
@@ -99,169 +120,202 @@
                                             <table cellpadding="0" cellspacing="0" border="0" width="100%">
                                                 <tbody>
                                                     <tr>
-                                                        <td rowspan="2">
+                                                        <td>
                                                             <a href="#">
-                                                                <img width="100px" height="150px" src="{{ThumbUrl}}" alt="Niagara Falls Day Tour" name="activityThumb" onerror="this.src ='img/photo-not-available-small.gif'">
+                                                                <img width="150px" height="200px" src="{{ThumbUrl}}" alt="Niagara Falls Day Tour" name="activityThumb" onerror="this.src ='img/photo-not-available-small.gif'">
                                                             </a>
                                                         </td>
-                                                        <td width="100%" valign="top" class="Activitie_title_box_title">
-                                                            <a class="ActivitiyName" target="_blank" href="../activity/activitydescription.html?SearchQualifier={{SearchQualifier}}">
-                                                                {{ActivityName}}
-                                                            </a>
-                                                        </td>
-                                                        <td valign="top"><img src="img/{{Rating}}Stars.gif"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td valign="top" class="Activitie_title_box_description">
-                                                            {{ShortDescription}} <br>
-                                                        </td>
-                                                    </tr>
+														<td style=width="200px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+														<td>
+															<table style="width:100%">
+																<tr>
+																	 <td width="100%" valign="top" class="Activitie_title_box_title">
+																		<a class="ActivitiyName" target="_blank" href="../activity/activitydescription.html?SearchQualifier={{SearchQualifier}}">
+																			{{ActivityName}} 
+																		</a>
+																	</td>
+																	<td valign="top"> <img src="img/{{Rating}}Stars.gif"></td>
+																</tr>
+																<tr colspan="2">
+																	 <td valign="top" class="Activitie_title_box_description">
+																		{{ShortDescription}} <br>
+																	  </td>
+																</tr>
+																<tr colspan="2">
+																	<td>
+																		<table width="100%">
+																			<tr>
+																				<td class="ActivityPricingDetailsNoTop">
+																					<table cellpadding="0" cellspacing="0" border="0" width="100%">
+																						<tbody>
+																							<tr>
+																								<td colspan="2" valign="bottom" style="padding-bottom: 4px">
+
+																									<b>Select available date:</b>&nbsp;
+																									<select id="ddlActivityAvailableDates_{{ActivityCode}}" ui-select2 class="input" style="width: 192px;" onchange="SelectActivityDate(1218245)">
+																										{{#AvailabilityDates}}
+																										<option value="{{.}}">{{.}}</option>
+																										{{/AvailabilityDates}}
+																									</select>
+
+
+																								</td>
+																								<td class="right_pad" style="padding-bottom: 4px">															
+																									{{#ShowAdultPrice}}
+																									<div>
+																										<nobr>
+																											<span id="Adults_1218217" class="pagesearchheaderName">Adult (11+)</span>
+																											<span id="PerPerson_1218217" style="display: none">Per Person</span>
+																										</nobr>
+																									</div>
+																									<select id="ddlActivityAdults_{{ActivityCode}}" class="input" style="width: 80px; margin-left:10px;" onchange="changeTotalMargin({{ActivityCode}})">
+																										<option value="1">1</option>
+																										<option value="2">2</option>
+																										<option value="3">3</option>
+																										<option value="4">4</option>
+																										<option value="5">5</option>
+																										<option value="6">6</option>
+																										<option value="7">7</option>
+																										<option value="8">8</option>
+																										<option value="9">9</option>
+																										<option value="10">10</option>
+																										<option value="11">11</option>
+																										<option value="12">12</option>
+																										<option value="13">13</option>
+																										<option value="14">14</option>
+																										<option value="15">15</option>
+																										<option value="16">16</option>
+																										<option value="17">17</option>
+																										<option value="18">18</option>
+																										<option value="19">19</option>
+																										<option value="20">20</option>
+																									</select>
+																									{{/ShowAdultPrice}}
+																								</td>
+																								<td style="padding-bottom: 4px; height: 38px;">
+																									{{#ShowChildPrice}}
+																									<div class="pagesearchheaderName">
+																										<nobr>Child (5-11)</nobr>
+																									</div>
+																									<select id="ddlActivityChilds_{{ActivityCode}}" class="input" style="width: 80px; margin-left:10px;" onchange="changeTotalMargin({{ActivityCode}})">
+																										<option value="0">0</option>
+																										<option value="1">1</option>
+																										<option value="2">2</option>
+																										<option value="3">3</option>
+																										<option value="4">4</option>
+																										<option value="5">5</option>
+																										<option value="6">6</option>
+																										<option value="7">7</option>
+																										<option value="8">8</option>
+																										<option value="9">9</option>
+																										<option value="10">10</option>
+																										<option value="11">11</option>
+																										<option value="12">12</option>
+																										<option value="13">13</option>
+																										<option value="14">14</option>
+																										<option value="15">15</option>
+																										<option value="16">16</option>
+																										<option value="17">17</option>
+																										<option value="18">18</option>
+																										<option value="19">19</option>
+																										<option value="20">20</option>
+																									</select>
+																									{{/ShowChildPrice}}
+																								</td>
+																								<!-- Margin-->
+																								<td style="padding-bottom: 4px; height: 38px; margin-left:10px;">
+																									<div class="pagesearchheaderName">
+																										{{#ShowUnitPrice}}
+																										<nobr>Unit</nobr>
+																										<select id="ddlActivityUnits_{{ActivityCode}}" class="input" style="width: 80px; margin-left:10px;" onchange="changeTotalMargin({{ActivityCode}})">																										
+																										<option value="1">1</option>
+																										<option value="2">2</option>
+																										<option value="3">3</option>
+																										<option value="4">4</option>
+																										<option value="5">5</option>
+																										<option value="6">6</option>
+																										<option value="7">7</option>
+																										<option value="8">8</option>
+																										<option value="9">9</option>
+																										<option value="10">10</option>
+																										<option value="11">11</option>
+																										<option value="12">12</option>
+																										<option value="13">13</option>
+																										<option value="14">14</option>
+																										<option value="15">15</option>
+																										<option value="16">16</option>
+																										<option value="17">17</option>
+																										<option value="18">18</option>
+																										<option value="19">19</option>
+																										<option value="20">20</option>
+																									</select>
+																										{{/ShowUnitPrice}}
+																									</div>
+																								</td>
+
+																							</tr>
+																						</tbody>
+																						<tbody style="display: ;" class="activityOptionstbody" name="tbody">
+																							{{#ActivityOptions}}
+																							<tr>
+																								<td style="padding: 0px 10px 7px 0px;">
+																									<input value="{{OptionId}}" name="Radio_{{ActivityCode}}" type="radio" class="rdo-{{ActivityCode}}">
+																								</td>
+																								<td width="100%" style="padding: 3px 0px 3px 3px;" class="pagesearchheaderValue">
+																									{{OptionName}}
+																								</td>
+
+																								<td nowrap="nowrap" class="align_left right_pad" style="padding-left:40px;">
+																									{{#ShowAdultPrice}}
+																									{{AdultPrice.Symbol}}{{AdultPrice.Amount}} &nbsp;
+																									{{/ShowAdultPrice}}
+																								</td>
+
+
+																								<td align="left" nowrap="nowrap" class="align_left right_pad" style="padding-left:40px;">
+																									{{#ShowChildPrice}}
+																									{{ChildPrice.Symbol}}{{ChildPrice.Amount}}
+																									{{/ShowChildPrice}}
+																								</td>
+
+																								<td align="left" nowrap="nowrap" class="pull-right">
+																									{{#ShowUnitPrice}}
+																									{{UnitPrice.Symbol}}{{UnitPrice.Amount}}
+																									{{/ShowUnitPrice}}
+																								</td>
+																							</tr>
+																							{{/ActivityOptions}}
+																						</tbody>
+
+																						<tbody>
+																							<tr>
+																								<td colspan="5" class="top_pad">
+																									<table cellpadding="0" cellspacing="0" border="0" width="100%">
+																										<tbody>
+																											<tr>
+																												<td nowrap="nowrap">
+																													&nbsp;
+																												</td>
+																											</tr>
+																										</tbody>
+																									</table>
+																								</td>
+																							</tr>
+																						</tbody>
+																					</table>										
+																				</td>
+																			</tr>
+																		</table>
+																	</td>
+																</tr>
+															</table>
+														</td>
                                                 </tbody>
                                             </table>
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="ActivityPricingDetailsNoTop">
-                                            <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                                                <tbody>
-                                                    <tr>
-                                                        <td colspan="2" valign="bottom" style="padding-bottom: 4px">
-
-                                                            <b>Select available date:</b>&nbsp;
-                                                            <select id="ddlActivityAvailableDates_{{ActivityCode}}" ui-select2 class="input" style="width: 192px;" onchange="SelectActivityDate(1218245)">
-                                                                {{#AvailabilityDates}}
-                                                                <option value="{{.}}">{{.}}</option>
-                                                                {{/AvailabilityDates}}
-                                                            </select>
-
-
-                                                        </td>
-                                                        <td class="right_pad" style="padding-bottom: 4px">
-                                                            {{#ShowAdultPrice}}
-                                                            <div>
-                                                                <nobr>
-                                                                    <span id="Adults_1218217">Adult (11+)</span>
-                                                                    <span id="PerPerson_1218217" style="display: none">Per Person</span>
-                                                                </nobr>
-                                                            </div>
-                                                            <select id="ddlActivityAdults_1218217" class="input" style="width: 45px" onchange="changeTotalMargin(1218217)">
-                                                                <option value="1">1</option>
-                                                                <option value="2">2</option>
-                                                                <option value="3">3</option>
-                                                                <option value="4">4</option>
-                                                                <option value="5">5</option>
-                                                                <option value="6">6</option>
-                                                                <option value="7">7</option>
-                                                                <option value="8">8</option>
-                                                                <option value="9">9</option>
-                                                                <option value="10">10</option>
-                                                                <option value="11">11</option>
-                                                                <option value="12">12</option>
-                                                                <option value="13">13</option>
-                                                                <option value="14">14</option>
-                                                                <option value="15">15</option>
-                                                                <option value="16">16</option>
-                                                                <option value="17">17</option>
-                                                                <option value="18">18</option>
-                                                                <option value="19">19</option>
-                                                                <option value="20">20</option>
-                                                            </select>
-                                                            {{/ShowAdultPrice}}
-                                                        </td>
-                                                        <td style="padding-bottom: 4px; height: 38px;">
-                                                            {{#ShowChildPrice}}
-                                                            <div>
-                                                                <nobr>Child (5-11)</nobr>
-                                                            </div>
-                                                            <select id="ddlActivityChilds_1218217" class="input" style="width: 45px" onchange="changeTotalMargin(1218217)">
-                                                                <option value="0">0</option>
-                                                                <option value="1">1</option>
-                                                                <option value="2">2</option>
-                                                                <option value="3">3</option>
-                                                                <option value="4">4</option>
-                                                                <option value="5">5</option>
-                                                                <option value="6">6</option>
-                                                                <option value="7">7</option>
-                                                                <option value="8">8</option>
-                                                                <option value="9">9</option>
-                                                                <option value="10">10</option>
-                                                                <option value="11">11</option>
-                                                                <option value="12">12</option>
-                                                                <option value="13">13</option>
-                                                                <option value="14">14</option>
-                                                                <option value="15">15</option>
-                                                                <option value="16">16</option>
-                                                                <option value="17">17</option>
-                                                                <option value="18">18</option>
-                                                                <option value="19">19</option>
-                                                                <option value="20">20</option>
-                                                            </select>
-                                                            {{/ShowChildPrice}}
-                                                        </td>
-                                                        <!-- Margin-->
-                                                        <td style="padding-bottom: 4px; height: 38px;">
-                                                            <div>
-                                                                {{#ShowUnitPrice}}
-                                                                <nobr>Unit Price</nobr>
-                                                                {{/ShowUnitPrice}}
-                                                            </div>
-                                                        </td>
-
-                                                    </tr>
-                                                </tbody>
-                                                <tbody style="display: ;" class="activityOptionstbody" name="tbody">
-                                                    {{#ActivityOptions}}
-                                                    <tr>
-                                                        <td style="padding: 0px 10px 7px 0px;">
-                                                            <input value="{{OptionId}}" name="Radio_{{OptionId}}" type="radio">
-                                                        </td>
-                                                        <td width="100%" style="padding: 3px 0px 3px 3px;">
-                                                            {{OptionName}}
-                                                        </td>
-
-                                                        <td nowrap="nowrap" class="align_left right_pad">
-                                                            {{#ShowAdultPrice}}
-                                                            {{AdultPrice.Symbol}}{{AdultPrice.Amount}} &nbsp;
-                                                            {{/ShowAdultPrice}}
-                                                        </td>
-
-
-                                                        <td align="left" nowrap="nowrap" class="align_left right_pad">
-                                                            {{#ShowChildPrice}}
-                                                            {{ChildPrice.Symbol}}{{ChildPrice.Amount}}
-                                                            {{/ShowChildPrice}}
-                                                        </td>
-
-                                                        <td align="left" nowrap="nowrap" class="pull-right">
-                                                            {{#ShowUnitPrice}}
-                                                            {{UnitPrice.Symbol}}{{UnitPrice.Amount}}
-                                                            {{/ShowUnitPrice}}
-                                                        </td>
-                                                    </tr>
-                                                    {{/ActivityOptions}}
-                                                </tbody>
-
-                                                <tbody>
-                                                    <tr>
-                                                        <td colspan="5" class="top_pad">
-                                                            <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td nowrap="nowrap">
-                                                                            &nbsp;
-                                                                        </td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                    </tr>
+										
+                                    </tr>                                   
+                                   
                                     <tr>
                                         <td class="Activities_discount">
                                             {{#ShowDiscount}}
@@ -273,8 +327,8 @@
                                     <tr>
                                         <td class="Infants_aged" style="font-style: italic;">
                                             **{{ChildAgeOffer}}**
-                                            <span style="padding-top:3px;" class="pull-right">
-                                                <button class="btn btn-warning btn-medium" activityOptionid="{{OptionId}}">Select</button>
+                                            <span  class="pull-right">
+                                                <input class="btn btn-primary btn-activity-shortlist" activityCode="{{ActivityCode}}" value="Short List" style="width:70px"/>
                                             </span>
                                         </td>
                                     </tr>
@@ -355,5 +409,6 @@
     <script src="bower_components/assets/js/libs/backbone.js"></script>
     <script src="bower_components/assets/js/libs/mustache.min.js"></script>
     <script src="bower_components/app/activitydetails.js"></script>
+	<script src="bower_components/app/common.js"></script>
 </body>
 </html>

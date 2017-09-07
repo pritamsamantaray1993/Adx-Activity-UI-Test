@@ -21,7 +21,7 @@
             <div id="Reg" class="box box-noborder">
                 <div class="box-header">
                     <h3>Activity Details</h3>
-                    <p>Selected activity details</p>
+                    <div id ="SearchCriteriaPlaceHolder"></div>
                 </div>
                 <div class="box-content" id="maincontainer">
                     <div class="box-content-margin">
@@ -48,7 +48,25 @@
             </div>
         </div>
     </div>
+<script id="tmpl-search-criteria" type="text/mustache-template">
 
+                    <div style="background-color: #E0E6E8; padding: 11px; border-radius: 5px;">
+						<table style="width:100%">
+							<tr>
+								<td class="pagesearchheaderName">DESTINATION</td>
+								<td class="pagesearchheaderValue">{{Destination.Description}}</td>
+								<td class="pagesearchheaderName">POPULARITY</td>
+								<td class="pagesearchheaderValue">{{MinRating}} - {{MaxRating}} Stars</td>
+							</tr>
+							<tr>
+								<td class="pagesearchheaderName">START DATE</td>
+								<td class="pagesearchheaderValue">{{StartDate}}</td>
+								<td class="pagesearchheaderName">END DATE</td>
+								<td class="pagesearchheaderValue">{{EndDate}}</td>
+							</tr>
+						</table>
+					</div>
+</script>
 <script id="tmpl-activity-description" type="text/mustache-template">
         {{#activityDetail}}
 
@@ -233,5 +251,6 @@
     <script src="bower_components/assets/js/libs/backbone.js"></script>
     <script src="bower_components/assets/js/libs/mustache.min.js"></script>
     <script src="bower_components/app/activitydescription.js"></script>
+	<script src="bower_components/app/common.js"></script>
 </body>
 </html>
